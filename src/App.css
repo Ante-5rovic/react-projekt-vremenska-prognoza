@@ -1,0 +1,25 @@
+.App{
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    margin: -8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: linear-gradient(rgb(56, 56, 56), rgb(75, 128, 185));
+}
+.heading{
+    text-transform: uppercase;
+    font-size: 40px;
+    margin: 30px 0;
+    color: white;
+    z-index: 1;
+    text-align: center;
+    font-family: Georgia, serif;
+}
+@media (max-width:800px){
+    .heading{
+        margin: 15px 0;
+        font-size: 35px;
+    }
+}
