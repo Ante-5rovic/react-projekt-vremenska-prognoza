@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import Trazilica from './Components/Trazilica';
+import Trazilica from './Components/Trazilica/Trazilica';
 //import Grad from './Components/Grad/Grad';
 import ListaGradova from './Components/ListaGradova/ListaGradova';
 function App() {
