@@ -1,0 +1,10 @@
+.container_lista_gradova{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    flex-wrap: wrap;
+    transition: 0.2s all;
+
+}
