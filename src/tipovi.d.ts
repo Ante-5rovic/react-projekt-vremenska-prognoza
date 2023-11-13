@@ -29,3 +29,12 @@ interface WeatherData {
     name: string;
     cod: number;
   }
+
+  interface ApiResponseGradovi {
+    name: string;
+    local_names: Record<string, string>;
+    lat: number;
+    lon: number;
+    country: string;
+    state: string;
+  }
