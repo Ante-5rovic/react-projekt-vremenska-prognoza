@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { SyntheticEvent } from 'react'
 import './Grad.css';
 import { IconButton } from "rsuite"; 
 import Minus from '@rsuite/icons/Minus';
@@ -10,14 +10,17 @@ interface Props{
   id:String;
   rezultat:WeatherData;
   iconVrijeme:IconType;
+  onClickDelete:(e:SyntheticEvent,long_lat:string)=>void;
 }
 
-const Grad: React.FC<Props> = ({id,rezultat,iconVrijeme}: Props) :JSX.Element=> {
+const Grad: React.FC<Props> = ({id,rezultat,iconVrijeme,onClickDelete}: Props) :JSX.Element=> {
   const IconComponent = iconVrijeme;
+  const str1=rezultat.coord.lat.toString();
+  const str2=rezultat.coord.lon.toString();
   return (
     <div className='grad'>
-        <div className='button_container'>
-          <IconButton className='minus_button' icon={<Minus />} type='submit' />
+        <div className='button_container' >
+          <IconButton className='minus_button' icon={<Minus />} type='submit' onClick={(e)=>onClickDelete(e,str1+str2)}/>
         </div>
         <h2 className='ime_grada'>{rezultat.name}</h2>
         <IconComponent className="icon_vrijeme"/>

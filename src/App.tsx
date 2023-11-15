@@ -43,8 +43,8 @@ function App() {
       //fja koja sprema pojedini podatak u local storage
       //prvo zelim napraviti hash od podatka kojeg cu koristiti kao key
       const objString=JSON.stringify(itemGradPprep);
-      const str1:string=itemGradPprep.lat.toString();
-      const str2:string=itemGradPprep.lon.toString();
+      const str1:string=itemGradPprep.lat.toString().substring(0,itemGradPprep.lat.toString().length-2);
+      const str2:string=itemGradPprep.lon.toString().substring(0,itemGradPprep.lon.toString().length-2);
       if(str1!==undefined&&str2!==undefined){
         const key=str1+str2;
         if(localStorage.length>=MY_CONSTANT)console.log('previse elemenata ograniceno na '+MY_CONSTANT);
@@ -119,7 +119,7 @@ function App() {
       const podatakApia= await geocodeLocation(search);
       if(podatakApia !==null && Array.isArray(podatakApia)){
         setPodatak(podatakApia);
-        dodajElULocalStorage(podatak[0]);
+        dodajElULocalStorage(podatakApia[0]);
         setPodatakVremenskaPrognoza(await parserUTrazenoVrijeme(vratiElIzLocalStorege()));
         console.log(podatak);
       }else if(podatakApia===null){
@@ -130,12 +130,21 @@ function App() {
       }
     };
 
+    const onClickDelete=async(e:SyntheticEvent,kljuc:string)=>{
+      //brisanje podatka iz local storega
+      if(localStorage.getItem(kljuc)!==null){
+        localStorage.removeItem(kljuc);
+      }
+      console.log(kljuc);
+
+    };
+
   return (
     <div className='App'>
         <span className='heading'>Prognoza</span>
         {serverError && <h1>{serverError}</h1>}
         <Trazilica onClick={onClick} search={search} handleChange={handleChange} podatak={podatakZaPrikazUSearchz} onClickTrazilica={onClickTrazilica}/>
-        <ListaGradova podatak={podatakVremenskaPrognoza}/>
+        <ListaGradova podatak={podatakVremenskaPrognoza} onClickDelete={onClickDelete}/>
     </div>
 
   );
