@@ -6,9 +6,10 @@ import ListaGradova from './Components/ListaGradova/ListaGradova';
 import { geocodeLocation, searchGrad } from './api';
 import {v4 as uuidv4} from 'uuid';
 import { Hash } from 'crypto';
+import { error } from 'console';
 
 
-const MY_CONSTANT: number = 5;//ogranicenje max elemenata localstoraga ujedno ograncava i pristup
+const MY_CONSTANT: number = 8;//ogranicenje max elemenata localstoraga ujedno ograncava i pristup
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
   const[serverError,setServerError]=useState<string|null>(null);
   const [data, setData] = useState<ApiResponseGradovi>();
   const [ignored, forceUpdate] = useReducer(x=>x+1,0);
+  const[podatakVremenskaPrognoza,setPodatakVremenskaPrognoza]=useState<WeatherData[]>([]);
 
 
 
@@ -29,10 +31,11 @@ function App() {
   }, [ignored]);
   
 
-    const onClickTrazilica=(e:SyntheticEvent,itemGradPprep:ApiResponseGradovi)=>{
+    const onClickTrazilica=async(e:SyntheticEvent,itemGradPprep:ApiResponseGradovi)=>{
       //dodavanje graa iz liste gradova ispod sheacha
       //console.log(itemGradPprep.name);
       dodajElULocalStorage(itemGradPprep);
+      setPodatakVremenskaPrognoza(await parserUTrazenoVrijeme(vratiElIzLocalStorege()))
 
     };
 
@@ -57,7 +60,14 @@ function App() {
       for (let key in localStorage){
         const pomStr=localStorage.getItem(key);
         if(pomStr!==null){
-          gradoviArray.push(JSON.parse(pomStr))
+          try{
+            gradoviArray.push(JSON.parse(pomStr));
+          }catch(error){
+            console.log("nije ispravan tip ajde dalje: "+error);//ugl apk kad se pokrece ponovo nekad stavi neke scoje podatke u local storage
+            //u buduce popraviti i staviti provjeru tip ===ApiResponseGradovi
+            //TO DO
+          }
+          
         }
       }
       //console.log(gradoviArray);
@@ -105,9 +115,12 @@ function App() {
 
     const onClick=async(e:SyntheticEvent)=>{
       //stisnuto je povecalo i dodaje se prvi grad koji odgovara opisu
+      
       const podatakApia= await geocodeLocation(search);
       if(podatakApia !==null && Array.isArray(podatakApia)){
         setPodatak(podatakApia);
+        dodajElULocalStorage(podatak[0]);
+        setPodatakVremenskaPrognoza(await parserUTrazenoVrijeme(vratiElIzLocalStorege()));
         console.log(podatak);
       }else if(podatakApia===null){
         setServerError("Network Error");
@@ -122,7 +135,7 @@ function App() {
         <span className='heading'>Prognoza</span>
         {serverError && <h1>{serverError}</h1>}
         <Trazilica onClick={onClick} search={search} handleChange={handleChange} podatak={podatakZaPrikazUSearchz} onClickTrazilica={onClickTrazilica}/>
-        <ListaGradova podatak={podatak}/>
+        <ListaGradova podatak={podatakVremenskaPrognoza}/>
     </div>
 
   );

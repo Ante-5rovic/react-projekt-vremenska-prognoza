@@ -5,7 +5,7 @@ import './ListaGradova.css';
 import {v4 as uuidv4} from 'uuid';
 
 interface Props  {
-  podatak:ApiResponseGradovi[];
+  podatak:WeatherData[];
 }
 
 const ListaGradova :React.FC<Props>= ({podatak}: Props):JSX.Element => {
@@ -14,7 +14,7 @@ const ListaGradova :React.FC<Props>= ({podatak}: Props):JSX.Element => {
       <div className='container_lista_gradova'>
         <>{podatak.length>0 ?(
             podatak.map((rezultat)=>{
-              return <Grad id={rezultat.state} key={uuidv4()} rezultat={rezultat} iconVrijeme={TiWeatherCloudy}/>;
+              return <Grad id={rezultat.name} key={uuidv4()} rezultat={rezultat} iconVrijeme={TiWeatherCloudy}/>;
             })
         ):(
           <h1>no resoults</h1>

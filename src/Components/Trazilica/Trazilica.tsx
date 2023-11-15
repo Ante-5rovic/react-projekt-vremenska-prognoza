@@ -7,7 +7,7 @@ import {v4 as uuidv4} from 'uuid';
 
 
 type Props={
-  onClick:(e:SyntheticEvent)=>void;
+  onClick:(e:SyntheticEvent,)=>void;
   search:string|undefined;
   handleChange:(e:ChangeEvent<HTMLInputElement>)=>void;
   podatak:ApiResponseGradovi[];

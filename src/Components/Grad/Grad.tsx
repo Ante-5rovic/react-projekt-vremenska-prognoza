@@ -8,7 +8,7 @@ import { IconType } from 'react-icons/lib';
 
 interface Props{
   id:String;
-  rezultat:ApiResponseGradovi;
+  rezultat:WeatherData;
   iconVrijeme:IconType;
 }
 
@@ -22,8 +22,8 @@ const Grad: React.FC<Props> = ({id,rezultat,iconVrijeme}: Props) :JSX.Element=> 
         <h2 className='ime_grada'>{rezultat.name}</h2>
         <IconComponent className="icon_vrijeme"/>
         <div className='podaci'>
-          <p id='temperatura' className='txt_prikaz'>Temperatura: {30}</p>
-          <p id='padaline' className='txt_prikaz'>Padaline: {30}</p>
+          <p id='temperatura' className='txt_prikaz'>Temp: {rezultat.main.temp} °C</p>
+          <p id='padaline' className='txt_prikaz'>Vrijeme: {rezultat.weather[0].description}</p>
         </div>
         
     </div>

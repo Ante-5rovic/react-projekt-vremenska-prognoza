@@ -3,6 +3,7 @@ const apiKey = 'f114c0ba238822b8ca161654532a0650';
 const apiUrl = 'https://api.openweathermap.org/data/2.5/weather';
 const baseUrl = "http://api.openweathermap.org/geo/1.0/direct";
 const num=5;//broj ogranicenja u shearch listi
+const jedinice="metric";
 
 
 
@@ -12,6 +13,7 @@ export const searchGrad=async(lat:number,lon:number): Promise<WeatherData | null
         lat: lat,
         lon: lon,
         appid:apiKey,
+        units:jedinice,
     };
 
     try{
