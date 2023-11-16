@@ -2,7 +2,6 @@ import React, { SyntheticEvent } from 'react'
 import './Grad.css';
 import { IconButton } from "rsuite"; 
 import Minus from '@rsuite/icons/Minus';
-import { TiWeatherCloudy } from 'react-icons/ti';
 import { IconType } from 'react-icons/lib';
 
 
