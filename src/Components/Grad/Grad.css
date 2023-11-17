@@ -22,7 +22,7 @@
     
 }
 .podaci{
-    width: 100%;
+    width: 90%;
     margin-left: 20px;
     margin-top: 10px;
     display: flex;
@@ -38,5 +38,5 @@
 }
 .icon_vrijeme{
     font-size: 100px;
-    color: rgb(89, 173, 207);
+    color: rgb(43, 84, 100);
 }
