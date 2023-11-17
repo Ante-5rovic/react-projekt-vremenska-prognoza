@@ -4,6 +4,7 @@ import Trazilica from './Components/Trazilica/Trazilica';
 //import Grad from './Components/Grad/Grad';
 import ListaGradova from './Components/ListaGradova/ListaGradova';
 import { geocodeLocation, searchGrad } from './api';
+import FloatingWidget from './Components/FloatingWidget/FloatingWidget';
 
 
 
@@ -161,6 +162,7 @@ function App() {
         {serverError && <h1>{serverError}</h1>}
         <Trazilica onClick={onClick} search={search} handleChange={handleChange} podatak={podatakZaPrikazUSearchz} onClickTrazilica={onClickTrazilica}/>
         <ListaGradova podatak={podatakVremenskaPrognoza} onClickDelete={onClickDelete}/>
+        <FloatingWidget/>
     </div>
 
   );
