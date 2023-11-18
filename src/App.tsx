@@ -12,6 +12,10 @@ const MY_CONSTANT: number = 8;//ogranicenje max elemenata localstoraga ujedno og
 
 
 function App() {
+  interface Location {
+    latitude: number | null;
+    longitude: number | null;
+  }
   //console.log(searchGrad(''));
   //console.log(geocodeLocation("ww"));
   const[search,setSearch]=useState<string>("Zagreb");
@@ -21,6 +25,7 @@ function App() {
   const [ignored, forceUpdate] = useReducer(x=>x+1,0);
   const [ignored2, forceUpdate2] = useReducer(x=>x+1,0);
   const[podatakVremenskaPrognoza,setPodatakVremenskaPrognoza]=useState<WeatherData[]>([]);
+  const [location, setLocation] = useState<Location>({ latitude: null, longitude: null });
 
 
 
@@ -34,6 +39,29 @@ function App() {
     //console.log('uslo u reductor 2');
     setPodatakVremenskaPrognoza(vratiElIzLocalStorege());
   }, [ignored2]);
+
+  useEffect(() => {
+    //dohva trenutne lokacije korisnika
+    const getLocation = () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            setLocation({
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+            });
+          },
+          (error) => {
+            console.error('Error getting location:', error.message);
+          }
+        );
+      } else {
+        console.error('Geolocation is not supported by this browser.');
+      }
+    };
+
+    getLocation();
+  }, []);
   
   
 
@@ -42,7 +70,7 @@ function App() {
       //console.log(itemGradPprep.name);
       dodajElULocalStorage(itemGradPprep);
       //forceUpdate2();
-
+      
     };
 
     const dodajElULocalStorage=async(itemGradPprep:ApiResponseGradovi)=>{
