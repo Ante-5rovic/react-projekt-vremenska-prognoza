@@ -14,4 +14,8 @@
     flex-flow: column;
     align-items: center;
 }
+.txt_dodajte_loaciju{
+    color: white;
+    font-style: italic;
+}
 

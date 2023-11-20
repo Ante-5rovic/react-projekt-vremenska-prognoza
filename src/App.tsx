@@ -4,6 +4,7 @@ import Trazilica from './Components/Trazilica/Trazilica';
 //import Grad from './Components/Grad/Grad';
 import ListaGradova from './Components/ListaGradova/ListaGradova';
 import { geocodeLocation, searchGrad } from './api';
+import FloatingWidget from './Components/FloatingWidget/FloatingWidget';
 
 
 
@@ -11,6 +12,49 @@ const MY_CONSTANT: number = 8;//ogranicenje max elemenata localstoraga ujedno og
 
 
 function App() {
+  interface Location {
+    latitude: number | null;
+    longitude: number | null;
+  }
+  const modal: WeatherData = {
+    coord: {
+      lon: 0,
+      lat: 0
+    },
+    weather: [{description: "vedro",icon: "01n",id: 800,main: "Clear"}],
+    base: '',
+    main: {
+      temp: 123,
+      feels_like: 0,
+      temp_min: 0,
+      temp_max: 0,
+      pressure: 0,
+      humidity: 0,
+      sea_level: undefined,
+      grnd_level: undefined
+    },
+    visibility: 0,
+    wind: {
+      speed: 0,
+      deg: 0,
+      gust: undefined
+    },
+    clouds: {
+      all: 0
+    },
+    dt: 0,
+    sys: {
+      type: 0,
+      id: 0,
+      country: '',
+      sunrise: 0,
+      sunset: 0
+    },
+    timezone: 0,
+    id: 0,
+    name: 'error',
+    cod: 0
+  };
   //console.log(searchGrad(''));
   //console.log(geocodeLocation("ww"));
   const[search,setSearch]=useState<string>("Zagreb");
@@ -20,6 +64,7 @@ function App() {
   const [ignored, forceUpdate] = useReducer(x=>x+1,0);
   const [ignored2, forceUpdate2] = useReducer(x=>x+1,0);
   const[podatakVremenskaPrognoza,setPodatakVremenskaPrognoza]=useState<WeatherData[]>([]);
+  const[trenutnaLokacija,setTrenutnaLoakcija]=useState<WeatherData>(modal);
 
 
 
@@ -33,6 +78,34 @@ function App() {
     //console.log('uslo u reductor 2');
     setPodatakVremenskaPrognoza(vratiElIzLocalStorege());
   }, [ignored2]);
+
+  useEffect(() => {
+    //dohva trenutne lokacije korisnika
+    //console.log('provjera');
+    const getLocation = () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          async(position) => {        
+            const lat=position.coords.latitude;
+            const lon=position.coords.longitude;
+            const trenutnaLokacijaa=await searchGrad(lat,lon);
+            if(trenutnaLokacijaa!==null){
+              setTrenutnaLoakcija(trenutnaLokacijaa);
+            }
+            //console.log(trenutnaLokacija);
+          },
+
+          (error) => {
+            console.error('Error getting location:', error.message);
+          }
+        );
+      } else {
+        console.error('Geolocation is not supported by this browser.');
+      }
+    };
+
+    getLocation();
+  }, []);
   
   
 
@@ -41,7 +114,7 @@ function App() {
       //console.log(itemGradPprep.name);
       dodajElULocalStorage(itemGradPprep);
       //forceUpdate2();
-
+      
     };
 
     const dodajElULocalStorage=async(itemGradPprep:ApiResponseGradovi)=>{
@@ -58,7 +131,7 @@ function App() {
         else if(localStorage.getItem(key)===null)localStorage.setItem(key,objString);
         else console.log("ovaj element vec postoji unutra storega nema ga potrebe dodavat");
       }
-      console.log(vratiElIzLocalStorege());
+      //console.log(vratiElIzLocalStorege());
       forceUpdate2();
 
       }
@@ -160,7 +233,8 @@ function App() {
         <span className='heading'>Prognoza</span>
         {serverError && <h1>{serverError}</h1>}
         <Trazilica onClick={onClick} search={search} handleChange={handleChange} podatak={podatakZaPrikazUSearchz} onClickTrazilica={onClickTrazilica}/>
-        <ListaGradova podatak={podatakVremenskaPrognoza} onClickDelete={onClickDelete}/>
+        <ListaGradova podatak={podatakVremenskaPrognoza} onClickDelete={onClickDelete} trenutaLoakcija={trenutnaLokacija}/>
+        
     </div>
 
   );
