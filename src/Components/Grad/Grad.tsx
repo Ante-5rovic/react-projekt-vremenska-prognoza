@@ -3,6 +3,7 @@ import './Grad.css';
 import { IconButton } from "rsuite"; 
 import Minus from '@rsuite/icons/Minus';
 import { IconType } from 'react-icons/lib';
+import { Link } from 'react-router-dom';
 
 
 interface Props{
@@ -43,12 +44,15 @@ const Grad: React.FC<Props> = ({id,rezultat,iconVrijeme,onClickDelete,timezone}:
         <div className='button_container' >
           <IconButton className='minus_button' icon={<Minus />} type='submit' onClick={(e)=>onClickDelete(e,str1+str2)}/>
         </div>
-        <h2 className='ime_grada'>{rezultat.name}</h2>
-        <IconComponent className="icon_vrijeme" style={{color}}/>
-        <div className='podaci'>
-          <p id='temperatura' className='txt_prikaz'>Temp: {rezultat.main.temp} °C</p>
-          <p id='padaline' className='txt_prikaz'>Vrijeme: {rezultat.weather[0].description}</p>
-        </div>
+        <Link to={"/graf/"+rezultat.coord.lat+"/"+rezultat.coord.lon }  className='grad2' >
+          <h2 className='ime_grada'>{rezultat.name}</h2>
+          <IconComponent className="icon_vrijeme" style={{color}}/>
+          <div className='podaci'>
+            <p id='temperatura' className='txt_prikaz'>Temp: {rezultat.main.temp} °C</p>
+            <p id='padaline' className='txt_prikaz'>Vrijeme: {rezultat.weather[0].description}</p>
+          </div>
+        </Link>
+        
         
     </div>
   );
