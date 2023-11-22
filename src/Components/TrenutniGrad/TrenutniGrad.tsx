@@ -3,6 +3,7 @@ import './TrenutniGrad.css';
 import { IconButton } from "rsuite"; 
 import Minus from '@rsuite/icons/Minus';
 import { IconType } from 'react-icons/lib';
+import { Link } from 'react-router-dom';
 
 
 interface Props{
@@ -43,12 +44,14 @@ const TrenutniGrad: React.FC<Props> = ({id,rezultat,iconVrijeme,timezone}: Props
         <div className='button_containerr' >
           Trenutna lokacija
         </div>
-        <h2 className='ime_grada'>{rezultat.name}</h2>
-        <IconComponent className="icon_vrijeme" style={{color}}/>
-        <div className='podaci'>
-          <p id='temperatura' className='txt_prikaz'>Temp: {rezultat.main.temp} °C</p>
-          <p id='padaline' className='txt_prikaz'>Vrijeme: {rezultat.weather[0].description}</p>
-        </div>
+        <Link to={"/graf/"+JSON.stringify(rezultat)} className='grad2' >
+          <h2 className='ime_grada'>{rezultat.name}</h2>
+          <IconComponent className="icon_vrijeme" style={{color}}/>
+          <div className='podaci'>
+            <p id='temperatura' className='txt_prikaz'>Temp: {rezultat.main.temp} °C</p>
+            <p id='padaline' className='txt_prikaz'>Vrijeme: {rezultat.weather[0].description}</p>
+          </div>
+        </Link>
         
     </div>
   );

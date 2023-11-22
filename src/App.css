@@ -18,10 +18,16 @@
     z-index: 1;
     text-align: center;
     font-family: Georgia, serif;
+    text-decoration: none;
 }
 @media (max-width:800px){
     .heading{
         margin: 15px 0;
         font-size: 35px;
     }
+}
+.footer{
+    text-decoration: none;
+    height: 20px;
+    width: 100%;
 }
