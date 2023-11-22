@@ -44,7 +44,7 @@ const Grad: React.FC<Props> = ({id,rezultat,iconVrijeme,onClickDelete,timezone}:
         <div className='button_container' >
           <IconButton className='minus_button' icon={<Minus />} type='submit' onClick={(e)=>onClickDelete(e,str1+str2)}/>
         </div>
-        <Link to={"/graf/"+JSON.stringify(rezultat)} className='grad2' >
+        <Link to={"/graf/"+rezultat.coord.lat+"/"+rezultat.coord.lon }  className='grad2' >
           <h2 className='ime_grada'>{rezultat.name}</h2>
           <IconComponent className="icon_vrijeme" style={{color}}/>
           <div className='podaci'>

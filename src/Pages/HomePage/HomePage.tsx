@@ -3,6 +3,7 @@ import { geocodeLocation, searchGrad } from '../../api';
 import Trazilica from '../../Components/Trazilica/Trazilica';
 import ListaGradova from '../../Components/ListaGradova/ListaGradova';
 import './HomePage.css';
+import { Link } from 'react-router-dom';
 
 interface Props {}
 const MY_CONSTANT: number = 8;//ogranicenje max elemenata localstoraga ujedno ograncava i pristup
@@ -226,6 +227,9 @@ const HomePage = (props: Props) => {
         };
   return (
     <div className='HomePage'>
+      <Link to="/" className='heading'>
+        <span className='heading'>Prognoza</span>
+      </Link>
         {serverError && <h1>{serverError}</h1>}
         <Trazilica onClick={onClick} search={search} handleChange={handleChange} podatak={podatakZaPrikazUSearchz} onClickTrazilica={onClickTrazilica}/>
         <ListaGradova podatak={podatakVremenskaPrognoza} onClickDelete={onClickDelete} trenutaLoakcija={trenutnaLokacija}/>
