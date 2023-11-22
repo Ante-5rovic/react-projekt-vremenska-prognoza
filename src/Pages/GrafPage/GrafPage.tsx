@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { search5DaysWeather } from '../../api'
+import Graf from '../../Components/Graf/Graf';
+import "./GrafPage.css"
 
 interface Props  {
   
@@ -79,11 +81,14 @@ const GrafPage = (props: Props) => {
 
   return (
     
-    <div>
+    <div className='graf_conteiner'>
       <Link to="/" className='heading'>
-        <span className='heading'>Ima_grada</span>
+        <span className='heading'>{prognoza.city.name}</span>
       </Link>
-      GrafPage
+      <div className='graf_prikaz'>
+      <Graf/>
+      </div>
+      
     </div>
   )
 }

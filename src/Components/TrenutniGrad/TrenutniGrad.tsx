@@ -44,7 +44,7 @@ const TrenutniGrad: React.FC<Props> = ({id,rezultat,iconVrijeme,timezone}: Props
         <div className='button_containerr' >
           Trenutna lokacija
         </div>
-        <Link to={"/graf/"+JSON.stringify(rezultat)} className='grad2' >
+        <Link to={"/graf/"+rezultat.coord.lat+"/"+rezultat.coord.lon } className='grad2' >
           <h2 className='ime_grada'>{rezultat.name}</h2>
           <IconComponent className="icon_vrijeme" style={{color}}/>
           <div className='podaci'>
