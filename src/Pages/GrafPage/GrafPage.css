@@ -26,3 +26,10 @@
     width: 70%;
     height: 500px;
 }
+.select{
+    width: 150px;
+}
+.naslov_grafa{
+    color: white;
+    font-style: italic;
+}
