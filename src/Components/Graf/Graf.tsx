@@ -137,7 +137,7 @@ const data = [
   ];
 
 const Graf = ({listaPodataka,interval,tipGrafa}: Props) => {
-
+//stavranje cvorova grafa u ovisnosti o tipu i kolicini podataka
   const podaci:data2[]=[]
   if(listaPodataka.length!==0){
     if(tipGrafa==="Temperatura"){
