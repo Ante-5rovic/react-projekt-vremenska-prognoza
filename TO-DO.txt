@@ -6,3 +6,4 @@ popravit grad select na trazilici da nestane kad se klikne okolo
 mozda naprviti timer da updejta svakih minut podake nam main pagu
 potencionalo futter
 izdvojiti funkcije u zasebnu klasu
+dodati jos koju vrstu grafa cito da bude ljepse
