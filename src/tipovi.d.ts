@@ -100,3 +100,38 @@ interface WeatherData {
     sunrise: number;
     sunset: number;
   }
+
+  interface WeatherDataHistory {
+    message: string;
+    cod: string;
+    city_id: number;
+    calctime: number;
+    cnt: number;
+    list: WeatherItemHistory[];
+  }
+  
+  interface WeatherItemHistory {
+    main: {
+      temp: number;
+      temp_min: number;
+      temp_max: number;
+      pressure: number;
+      sea_level: number;
+      grnd_level: number;
+      humidity: number;
+    };
+    wind: {
+      speed: number;
+      deg: number;
+    };
+    clouds: {
+      all: number;
+    };
+    weather: {
+      id: number;
+      main: string;
+      description: string;
+      icon: string;
+    }[];
+    dt: number;
+  }

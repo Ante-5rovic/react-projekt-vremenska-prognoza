@@ -21,8 +21,23 @@
     flex-direction: column;
     justify-content: start;
     align-items: center;
+    
 }
 .graf_prikaz{
     width: 70%;
     height: 500px;
+}
+.select{
+    width: 150px;
+    margin: 10px 10px;
+}
+.naslov_grafa{
+    color: white;
+    font-style: italic;
+}
+.filteri{
+    width: 100%;
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
 }

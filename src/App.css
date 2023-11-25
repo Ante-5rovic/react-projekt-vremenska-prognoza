@@ -8,7 +8,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-image: linear-gradient(rgb(56, 56, 56), rgb(75, 128, 185));
+    background-image: linear-gradient(rgb(56, 56, 56)0%, rgb(75, 128, 185)100vh,rgb(75, 128, 185)100%);
 }
 
 
