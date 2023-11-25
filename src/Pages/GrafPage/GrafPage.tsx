@@ -85,8 +85,8 @@ const GrafPage = (props: Props) => {
   //const[prognozaHistory,setPrognozaHistory]=useState<WeatherDataHistory>();
   const [ignored, forceUpdate] = useReducer(x=>x+1,0);
   const[vremenskiInterval,setVremenskiInterval]=useState<number>(3);
-  const[vrstaPodatak,setVrstaPodataka]=useState<string>("obicnaPrognoza");
-  const[vrstaPodatakZaNaslov,setVrstaPodatakaZaNaslov]=useState<string>("Temperatura + vrjeme");
+  const[vrstaPodatak,setVrstaPodataka]=useState<string>("Temperatura");
+  const[vrstaPodatakZaNaslov,setVrstaPodatakaZaNaslov]=useState<string>("Temperatura");
   //search5DaysWeather
   useEffect(() => {
     //poziv apija odma u startu
@@ -135,10 +135,10 @@ const GrafPage = (props: Props) => {
     { value: 8, label: '24 h' },
   ]
   const optionsVrsta = [
-    { value: "obicnaPrognoza", label: 'Temperatura + vrjeme' },
-    { value: "tlak", label: 'Tlak' },
-    { value: "naoblaka", label: 'Naoblaka' },
-    { value: "vlaga", label: 'Vlaga' },
+    { value: "Temperatura", label: 'Temperatura' },
+    { value: "Tlak", label: 'Tlak' },
+    { value: "Naoblaka", label: 'Naoblaka' },
+    { value: "Vlaga", label: 'Vlaga' },
     
   ]
 
