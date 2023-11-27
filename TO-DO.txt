@@ -1,5 +1,5 @@
 treba dodati strelicu za povrat na main page
-treba napravit u useEffect da mi udate sve podatke iz local storega
+treba napravit u useEffect da mi udate sve podatke iz local storega ++
 ispolirati kod izbaciti visak van
 dodati svugdje tipova
 popravit grad select na trazilici da nestane kad se klikne okolo
@@ -7,4 +7,4 @@ mozda naprviti timer da updejta svakih minut podake nam main pagu
 potencionalo futter
 izdvojiti funkcije u zasebnu klasu
 dodati jos koju vrstu grafa cito da bude ljepse
-prsoiriti component grad height
+prsoiriti component grad height ++
