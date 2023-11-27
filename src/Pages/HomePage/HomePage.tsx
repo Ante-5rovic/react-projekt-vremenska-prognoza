@@ -60,6 +60,7 @@ const HomePage = (props: Props) => {
       const[serverError,setServerError]=useState<string|null>(null);
       const [ignored, forceUpdate] = useReducer(x=>x+1,0);
       const [ignored2, forceUpdate2] = useReducer(x=>x+1,0);
+      const [ignored3, forceUpdate3] = useReducer(x=>x+1,0);
       const[podatakVremenskaPrognoza,setPodatakVremenskaPrognoza]=useState<WeatherData[]>([]);
       const[trenutnaLokacija,setTrenutnaLoakcija]=useState<WeatherData>(modal);
     
@@ -77,6 +78,7 @@ const HomePage = (props: Props) => {
       }, [ignored2]);
     
       useEffect(() => {
+        updateLocalStorageOnRelode();
         //dohva trenutne lokacije korisnika
         //console.log('provjera');
         const getLocation = () => {
@@ -102,7 +104,45 @@ const HomePage = (props: Props) => {
         };
     
         getLocation();
+        vratiElIzLocalStorege();
       }, []);
+
+
+      const updateLocalStorageOnRelode=async()=>{
+        const lista:WeatherData[]=[];
+        for (let key in localStorage){
+          try{
+            if(key!==null){
+              const podatak=localStorage.getItem(key);
+              if(podatak!==null){
+                lista.push(JSON.parse(podatak));
+              }  
+            }      
+          }catch{
+          }
+        }
+        localStorage.clear();
+        for(var i=0;i<lista.length;i++){
+          var podatak:WeatherData;
+          podatak=lista[i];
+          const itemWeatherGrad=await searchGrad(podatak.coord.lat,podatak.coord.lon);
+          if(itemWeatherGrad!==null){
+            const objString=JSON.stringify(itemWeatherGrad);
+            const str1:string=itemWeatherGrad.coord.lat.toString();
+            const str2:string=itemWeatherGrad.coord.lon.toString();
+            if(str1!==undefined&&str2!==undefined){
+            const key=str1+str2;
+            if(localStorage.length>=MY_CONSTANT)console.log('previse elemenata ograniceno na '+MY_CONSTANT);
+            else if(localStorage.getItem(key)===null)localStorage.setItem(key,objString);
+            else console.log("ovaj element vec postoji unutra storega nema ga potrebe dodavat");
+          }         
+        }
+      }
+      forceUpdate2();
+    }
+
+
+
       
       
     
