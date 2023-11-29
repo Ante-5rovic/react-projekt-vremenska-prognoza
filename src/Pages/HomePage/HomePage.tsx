@@ -244,11 +244,16 @@ const HomePage = (props: Props) => {
           
           const podatakApia= await geocodeLocation(search);
           if(podatakApia !==null && Array.isArray(podatakApia)){
-            setPodatak(podatakApia);
-            dodajElULocalStorage(podatakApia[0]);
-            setPodatakVremenskaPrognoza(vratiElIzLocalStorege());
-            //forceUpdate2();
-            console.log(podatak);
+            if(podatakApia.length>0){
+              setPodatak(podatakApia);
+              dodajElULocalStorage(podatakApia[0]);
+              setPodatakVremenskaPrognoza(vratiElIzLocalStorege());
+              //forceUpdate2();
+              console.log(podatak);
+            }else{
+              console.log("grad pod ovim imenom ne postoji");
+              //TO DO opcionalo dodati pop up koji kaze da grad pod tim imenom ne postoji
+            }      
           }else if(podatakApia===null){
             setServerError("Network Error");
             console.log("nema int");
