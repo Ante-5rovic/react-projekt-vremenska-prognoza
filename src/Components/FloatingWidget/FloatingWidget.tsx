@@ -4,6 +4,8 @@ import './FloatingWidget.css';
 
 type Props = {}
 
+//ne kosristi se ali je zanimljivo pa sam ostavi za možda neku funkcionalnost u buducnosti
+
 const FloatingWidget = (props: Props) => {
   return (
     <Draggable>

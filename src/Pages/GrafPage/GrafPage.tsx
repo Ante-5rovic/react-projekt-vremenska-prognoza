@@ -1,15 +1,14 @@
 import React, { useEffect, useReducer, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { search5DaysWeather, searchWeatherHistory } from '../../api'
+import { search5DaysWeather } from '../../api'
 import Graf from '../../Components/Graf/Graf';
 import "./GrafPage.css"
 import Select from 'react-select';
-import { InputActionMeta } from 'react-select/dist/declarations/src';
-import { DataGrid, GridColDef, GridRowsProp } from '@mui/x-data-grid';
-import { AgGridReact } from 'ag-grid-react';
-import { ColDef } from 'ag-grid-community';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { IconType } from 'react-icons';
-import { WiCloud, WiCloudy, WiDayCloudy, WiDayRain, WiDaySunny, WiFog, WiNightAltCloudy, WiNightAltRain, WiNightClear, WiRain, WiSnow, WiThunderstorm } from 'react-icons/wi';
+import { WiCloud, WiCloudy, WiDayCloudy, WiDayRain, WiDaySunny, WiFog, 
+  WiNightAltCloudy, WiNightAltRain, WiNightClear, WiRain, WiSnow, WiThunderstorm } from 'react-icons/wi';
+import { IoArrowBackOutline } from "react-icons/io5";
 
 interface Props  {
   
@@ -351,6 +350,11 @@ const GrafPage = (props: Props) => {
       <DataGrid className="grid" rows={podaciZaTablicu} columns={columns} disableColumnMenu disableColumnFilter disableColumnSelector disableDensitySelector disableEval disableRowSelectionOnClick disableVirtualization ignoreDiacritics  
        initialState={{pagination: {paginationModel: {pageSize: 10,},},}} pageSizeOptions={[5, 10, 15]}
        />
+       <div className='back_flating_button_conteiner'>
+        <Link to="/">
+          <IoArrowBackOutline className='back_flating_button' />
+        </Link>
+       </div>
       
     </div>
   )

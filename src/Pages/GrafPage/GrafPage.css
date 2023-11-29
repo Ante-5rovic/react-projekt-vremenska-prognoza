@@ -41,3 +41,15 @@
     flex-flow: row;
     justify-content: center;
 }
+.back_flating_button_conteiner{
+    position: fixed;
+    top: 30px;
+    left: 30px;
+    z-index: 1000;
+    
+}
+.back_flating_button{
+    width: 40px;
+    height: 40px;
+    color: white;
+}
